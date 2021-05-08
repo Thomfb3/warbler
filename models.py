@@ -27,6 +27,7 @@ class Follows(db.Model):
     )
 
 
+
 class Likes(db.Model):
     """Mapping user likes to warbles."""
 
@@ -47,6 +48,7 @@ class Likes(db.Model):
         db.ForeignKey('messages.id', ondelete='cascade'),
         unique=True
     )
+
 
 
 class User(db.Model):
@@ -184,6 +186,7 @@ class User(db.Model):
         return False
 
 
+
 class Message(db.Model):
     """An individual message ("warble")."""
 
@@ -212,6 +215,10 @@ class Message(db.Model):
     )
 
     user = db.relationship('User')
+
+    def __repr__(self):
+        return f"<Message #{self.id}: {self.user_id}, {self.timestamp}>"
+
 
 
 def connect_db(app):
